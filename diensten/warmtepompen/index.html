@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 25, 110, 0.18), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(230, 25, 110, 0.4);
+}
+.spotlight-card > * {
+  position: relative;
+  z-index: 2;
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-primary-fixed-variant": "#8f0040",
+        "on-primary-fixed": "#3f0018",
+        "error": "#ba1a1a",
+        "secondary": "#5f5e60",
+        "inverse-primary": "#ffb1c2",
+        "on-error-container": "#93000a",
+        "on-tertiary": "#ffffff",
+        "surface-offwhite": "#F9F9F9",
+        "surface": "#fcf8fb",
+        "surface-container-lowest": "#ffffff",
+        "brand-pink-vibrant": "#FF007A",
+        "primary-fixed-dim": "#ffb1c2",
+        "background": "#fcf8fb",
+        "on-surface": "#1b1b1d",
+        "border-subtle-light": "#E4E4E7",
+        "surface-container-low": "#f6f3f5",
+        "surface-variant": "#e5e1e4",
+        "outline-variant": "#e3bdc4",
+        "on-tertiary-fixed": "#002107",
+        "surface-dark-elevated": "#18181B",
+        "secondary-container": "#e5e1e4",
+        "on-secondary-container": "#656466",
+        "secondary-fixed-dim": "#c8c6c8",
+        "surface-container": "#f0edef",
+        "surface-dim": "#dcd9dc",
+        "inverse-on-surface": "#f3f0f2",
+        "surface-light": "#FFFFFF",
+        "surface-dark": "#0C0C0E",
+        "on-primary-container": "#fffbff",
+        "tertiary": "#006b27",
+        "on-secondary-fixed": "#1b1b1d",
+        "on-surface-variant": "#5b3f45",
+        "on-secondary-fixed-variant": "#474649",
+        "tertiary-fixed": "#89fb95",
+        "secondary-fixed": "#e5e1e4",
+        "on-tertiary-fixed-variant": "#00531c",
+        "primary-fixed": "#ffd9e0",
+        "surface-container-high": "#eae7ea",
+        "primary": "#b70054",
+        "border-subtle-dark": "#27272A",
+        "on-primary": "#ffffff",
+        "surface-bright": "#fcf8fb",
+        "on-secondary": "#ffffff",
+        "on-tertiary-container": "#f7fff2",
+        "primary-container": "#e1136b",
+        "outline": "#8f6f75",
+        "inverse-surface": "#303032",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "tertiary-fixed-dim": "#6dde7c",
+        "on-background": "#1b1b1d",
+        "surface-tint": "#bb0056",
+        "text-muted": "#71717A",
+        "surface-container-highest": "#e5e1e4",
+        "tertiary-container": "#008733"
+      },
+      "borderRadius": {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "margin-mobile": "1.25rem",
+        "space-xs": "0.375rem",
+        "margin": "3rem",
+        "gutter": "1.5rem",
+        "space-2xl": "6rem",
+        "space-md": "1.25rem",
+        "space-xl": "3.5rem",
+        "space-lg": "2rem",
+        "gutter-mobile": "0.75rem"
+      },
+      "fontFamily": {
+        "headline-lg-mobile": [
+          "Epilogue"
+        ],
+        "headline-xl": [
+          "Epilogue"
+        ],
+        "label-md": [
+          "Space Grotesk"
+        ],
+        "body-lg": [
+          "Space Grotesk"
+        ],
+        "label-tag": [
+          "Space Grotesk"
+        ],
+        "label-lg": [
+          "Space Grotesk"
+        ],
+        "display-hero": [
+          "Epilogue"
+        ],
+        "headline-sm": [
+          "Epilogue"
+        ],
+        "body-sm": [
+          "Space Grotesk"
+        ],
+        "display-hero-mobile": [
+          "Epilogue"
+        ],
+        "headline-md": [
+          "Epilogue"
+        ],
+        "body-md": [
+          "Space Grotesk"
+        ],
+        "headline-xl-mobile": [
+          "Epilogue"
+        ],
+        "headline-lg": [
+          "Epilogue"
+        ]
+      },
+      "fontSize": {
+        "headline-lg-mobile": [
+          "28px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-xl": [
+          "56px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "800"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.06em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-tag": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.08em",
+            "fontWeight": "700"
+          }
+        ],
+        "label-lg": [
+          "14px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "700"
+          }
+        ],
+        "display-hero": [
+          "84px",
+          {
+            "lineHeight": "88px",
+            "letterSpacing": "-0.04em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "26px",
+            "letterSpacing": "0em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "display-hero-mobile": [
+          "44px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-md": [
+          "26px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-xl-mobile": [
+          "34px",
+          {
+            "lineHeight": "38px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-lg": [
+          "40px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><div style="position:sticky;top:0;z-index:60;background:#0C0C0E;color:#fff;font-family:Space Grotesk,system-ui,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between"><span><strong style="color:#FF007A">Stitch preview</strong> · Zolano Installaties · project 8904295251056646246</span><span style="opacity:.85"><a href="/prijzen/" style="color:#FF007A;text-decoration:none;font-weight:700">Prijzen &amp; PDF's</a></span></div><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin-mobile lg:px-margin h-20 flex items-center justify-between"><a class="flex items-center gap-1 group" data-path="diensten" href="/diensten/warmtepompen/"><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-extrabold">Zolano</span><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-normal ml-1 hidden sm:inline">Installaties</span><span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-container transition-transform group-hover:scale-125"></span></a><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold shadow-sm"><a aria-current="page" class="px-space-md py-space-xs rounded-full transition-all flex items-center gap-1 bg-primary-container text-on-primary font-bold shadow-sm" data-path="diensten" href="/diensten/warmtepompen/">Diensten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="projecten" href="/projecten/">Projecten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="over-zolano" href="/over/">Over Zolano</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="prijzen" href="/prijzen/">Prijzen</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface flex items-center gap-2" data-path="werken-bij" href="#">Werken bij<span class="w-4 h-4 rounded-full bg-primary-container text-on-primary font-label-tag text-label-tag flex items-center justify-center font-bold">1</span></a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-xs rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-surface-dark hover:text-on-primary transition-all duration-200" data-path="offerte-aanvragen" href="#">Offerte aanvragen</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- SECTION 1: EDITORIAL HERO WITH ASYMMETRIC BENTO ACCENT -->
+<section class="relative w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-2xl overflow-hidden">
+<!-- Subtle architectural background glow -->
+<div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Bold Typography & Category Anchors -->
+<div class="lg:col-span-8 flex flex-col justify-start">
+<!-- Monospaced Category Indicator -->
+<div class="inline-flex items-center gap-space-xs mb-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-brand-pink-vibrant animate-pulse"></span>
+<span class="font-label-tag text-label-tag uppercase text-on-surface-variant tracking-widest font-bold">Klimaattechniek • Barneveld &amp; Regio</span>
+<span class="text-secondary font-label-tag text-label-tag">/</span>
+<span class="text-secondary font-label-tag text-label-tag uppercase">BRL 100 Gecertificeerd</span>
+</div>
+<!-- High-Impact Poster Headline -->
+<h1 class="font-headline-xl lg:font-display-hero text-headline-xl lg:text-display-hero text-on-surface tracking-tighter uppercase mb-space-md">
+          Warmtepompen &amp; <br/>
+<span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-brand-pink-vibrant via-primary-container to-primary underline decoration-brand-pink-vibrant/30 decoration-8 underline-offset-8">Hybride</span> Systemen
+        </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl leading-relaxed mb-space-lg">
+          Klaar voor gasloos of tot 70% besparen met een hybride koppeling? Zolano ontwerpt, berekent en installeert fluisterstille all-electric en hybride warmtepompsystemen met Nederlandse montageprecisie. Vanuit onze vestiging in Barneveld ontzorgen wij villa-eigenaren en zakelijke opdrachtgevers van transmissieberekening tot ISDE-subsidieafhandeling.
+        </p>
+<!-- Feature Filter Pills -->
+<div class="flex flex-wrap items-center gap-space-xs mb-space-xl">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-dark hover:text-on-primary transition-colors cursor-default">
+            All-Electric Systemen
+          </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-dark hover:text-on-primary transition-colors cursor-default">
+            Hybride CV-Koppeling
+          </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-dark hover:text-on-primary transition-colors cursor-default">
+            Aardwarmte &amp; Bodemlussen
+          </span>
+<span class="px-space-md py-space-xs rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold shadow-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+            ISDE Subsidie tot €3.750
+          </span>
+</div>
+<!-- Dual CTA Row -->
+<div class="flex flex-wrap items-center gap-space-md">
+<a class="px-space-xl py-space-md rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-lg hover:bg-surface-dark transition-all duration-200 flex items-center gap-2 group" href="#systemen">
+            Vergelijk Systemen
+            <span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-y-0.5">arrow_downward</span>
+</a>
+<a class="px-space-lg py-space-md rounded-full bg-surface-container-lowest text-on-surface font-label-lg text-label-lg hover:bg-surface-container-high shadow-sm transition-all duration-200 flex items-center gap-1.5" href="#subsidie-aanvraag">
+<span class="material-symbols-outlined text-[18px] text-tertiary">euro_symbol</span>
+            Subsidiecheck doen
+          </a>
+</div>
+</div>
+<!-- Right Column: Signature Hot-Pink Bento Performance Card -->
+<div class="lg:col-span-4 mt-space-lg lg:mt-0 flex flex-col gap-gutter">
+<div class="w-full bg-brand-pink-vibrant rounded-lg p-space-lg text-on-primary shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+<!-- Geometric Background Striping Pattern -->
+<div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-on-primary/10 blur-xl pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-on-primary/20 text-on-primary font-label-tag text-label-tag tracking-wider uppercase backdrop-blur-md">
+                Prestatiegarantie
+              </span>
+<div class="flex items-center gap-1.5 bg-surface-dark/20 px-space-xs py-0.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-ping"></span>
+<span class="font-label-tag text-label-tag font-bold">Live COP</span>
+</div>
+</div>
+<div class="font-display-hero lg:font-display-hero text-display-hero text-on-primary tracking-tighter leading-none mb-1 font-black">
+              5.2
+            </div>
+<div class="font-label-lg text-label-lg uppercase tracking-wider text-on-primary/90 font-bold mb-space-sm">
+              Seizoensrendement (SCOP)
+            </div>
+<p class="font-body-sm text-body-sm text-on-primary/90 leading-snug">
+              Voor elke 1 kWh stroom wekt de NIBE &amp; Daikin buitenunit maar liefst 5.2 kWh nuttige warmte op. Gegarandeerd stil tot &lt;32 dB(A).
+            </p>
+</div>
+<!-- Inline Technical Sparkline / Efficiency Graph -->
+<div class="pt-space-md mt-space-md bg-on-primary/10 rounded p-space-sm backdrop-blur-sm">
+<div class="flex items-center justify-between text-on-primary font-label-md text-label-md mb-1 font-bold">
+<span>Jaarlijkse Gasreductie</span>
+<span>-84% m³</span>
+</div>
+<!-- Progress Meter -->
+<div class="w-full h-2 rounded-full bg-on-primary/25 overflow-hidden">
+<div class="h-full bg-on-primary rounded-full transition-all duration-1000" style="width: 84%"></div>
+</div>
+<div class="flex justify-between items-center mt-2 text-on-primary/80 font-label-tag text-label-tag">
+<span>Standaard HR-ketel: COP 0.9</span>
+<span>Zolano Hybride/Elec: COP 5.2</span>
+</div>
+</div>
+</div>
+<!-- Secondary Stat Pip -->
+<div class="w-full bg-surface-container-lowest rounded p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">320+ Woningen</div>
+<div class="font-body-sm text-body-sm text-secondary">Verduurzaamd in Gelderland &amp; Utrecht</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[22px]">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: DARK ARCHITECTURAL BENTO GRID -->
+<section class="w-full bg-surface-dark text-on-primary px-margin-mobile lg:px-margin py-space-2xl" id="systemen">
+<!-- Section Header Monolith -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between mb-space-xl">
+<div>
+<div class="inline-flex items-center gap-space-xs text-brand-pink-vibrant font-label-tag text-label-tag uppercase tracking-widest font-bold mb-space-xs">
+<span class="w-2 h-2 rounded-full bg-brand-pink-vibrant"></span>
+          Kies uw configuratie
+        </div>
+<h2 class="font-headline-xl text-headline-xl tracking-tight text-on-primary uppercase font-extrabold">
+          Systeemspecificaties &amp; Cases
+        </h2>
+</div>
+<p class="font-body-md text-body-md text-secondary max-w-md mt-space-sm lg:mt-0 leading-relaxed">
+        Iedere woning vereist een exacte capaciteitsmatching. Wij installeren uitsluitend A-merken met modulerende invertertechnologie.
+      </p>
+</div>
+<!-- Bento Masonry Layout (12 Columns) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter">
+<!-- Bento Card 1: All-Electric System (6 cols) -->
+<div class="spotlight-card lg:col-span-6 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-space-xs rounded-full bg-surface-dark text-brand-pink-vibrant font-label-tag text-label-tag uppercase tracking-wider font-bold">
+              100% Aardgasvrij
+            </span>
+<span class="font-label-md text-label-md text-secondary">Montage: 2-3 werkdagen</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary mb-space-xs font-bold">
+            All-Electric Warmtepomp
+          </h3>
+<p class="font-body-md text-body-md text-secondary mb-space-lg leading-relaxed">
+            De ultieme stap naar nul-op-de-meter. Uw gasaansluiting kan definitief worden verzegeld. Verwarmt het huis, koelt in de zomer en levert warm tapwater via een geïntegreerde RVS boiler.
+          </p>
+<!-- System Specs List -->
+<div class="space-y-space-xs mb-space-lg">
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Ideaal voor</span>
+<span class="text-on-primary font-semibold">Nieuwbouw of goed geïsoleerde woningen (A-label)</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Afgiftesysteem</span>
+<span class="text-on-primary font-semibold">Vloerverwarming of Laag-Temperatuur radiatoren</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Tapwater Boiler</span>
+<span class="text-on-primary font-semibold">180L tot 300L hoogwaardig RVS</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Gem. Besparing</span>
+<span class="text-tertiary-fixed font-bold">100% op gaskosten (€1.800 - €3.100/jaar)</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm text-on-primary">
+            Vanaf €7.850 <span class="font-body-sm text-body-sm text-secondary font-normal">na aftrek subsidie</span>
+</div>
+<a class="px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-md text-label-md hover:bg-brand-pink-vibrant transition-colors" href="#offerte">
+            Specificaties →
+          </a>
+</div>
+</div>
+<!-- Bento Card 2: Hybride System (6 cols) -->
+<div class="spotlight-card lg:col-span-6 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-space-xs rounded-full bg-surface-dark text-tertiary-fixed font-label-tag text-label-tag uppercase tracking-wider font-bold">
+              Beste tussenstap
+            </span>
+<span class="font-label-md text-label-md text-secondary">Montage: 1 werkdag</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary mb-space-xs font-bold">
+            Hybride Warmtepomp
+          </h3>
+<p class="font-body-md text-body-md text-secondary mb-space-lg leading-relaxed">
+            Werkt intelligent samen met uw huidige cv-ketel. De warmtepomp verzorgt tot 80% van de verwarming; alleen tijdens extreme vorst springt het gasketel-element kortstondig bij.
+          </p>
+<!-- System Specs List -->
+<div class="space-y-space-xs mb-space-lg">
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Geschikt voor</span>
+<span class="text-on-primary font-semibold">Vrijwel elk bestaand huis (C-, B- en A-labels)</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Huidige CV-Ketel</span>
+<span class="text-on-primary font-semibold">Blijft behouden voor piekbelasting &amp; tapwater</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Woningaanpassing</span>
+<span class="text-on-primary font-semibold">Geen nieuwe radiatoren direct noodzakelijk</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-dark rounded font-body-sm text-body-sm">
+<span class="text-secondary">Gem. Besparing</span>
+<span class="text-tertiary-fixed font-bold">60% tot 75% minder aardgasverbruik</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="font-headline-sm text-headline-sm text-on-primary">
+            Vanaf €3.490 <span class="font-body-sm text-body-sm text-secondary font-normal">na aftrek subsidie</span>
+</div>
+<a class="px-space-md py-space-xs rounded-full bg-surface-dark text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors" href="#offerte">
+            Specificaties →
+          </a>
+</div>
+</div>
+<!-- Bento Card 3: Featured Case Study (7 cols) -->
+<div class="spotlight-card lg:col-span-7 bg-surface-dark-elevated rounded-lg overflow-hidden flex flex-col justify-between shadow-xl">
+<div class="relative h-64 sm:h-72 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" data-alt="Modern luxury Dutch villa in Voorthuizen with integrated exterior NIBE heat pump, sleek architectural zinc cladding, minimalist landscaped garden with clean paving, dusk mood lighting, warm interior glow through floor-to-ceiling glass windows, shot with crisp editorial architectural photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu5rg3fXCCd3eTKIm_GAA7nCgvc5hGI6pOGuKnGmzY2yh_nS4PAamxvkv8wF-WhCGVCWrIgDKz73K3egKnw79XPllpjfr-3_rWWmGYHaK-M2ccCaXLSwJaBGlJWVEj7NPfIxwqeR1rEesAMkcZT3AR3tu6nPFw9EA4FDIHTQoZ_nZLG8SH4CQ9PZJZWup0BGvd9dzweNwCoMi1p4Vf9w0sMBU6s1knb0rex8_z7XI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark-elevated via-surface-dark-elevated/40 to-transparent"></div>
+<div class="absolute top-space-md left-space-md">
+<span class="px-space-sm py-space-xs rounded-full bg-surface-dark/90 backdrop-blur-md text-on-primary font-label-tag text-label-tag uppercase tracking-wider font-bold">
+              Opgeleverd Project
+            </span>
+</div>
+</div>
+<div class="p-space-lg -mt-10 relative z-10">
+<div class="font-label-tag text-label-tag text-brand-pink-vibrant uppercase tracking-widest font-bold mb-1">
+            Case Study • Voorthuizen
+          </div>
+<h3 class="font-headline-md text-headline-md text-on-primary font-bold mb-space-xs">
+            Luxe Woonvilla Voorthuizen
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary mb-space-md leading-relaxed">
+            Volledige all-electric transitie voor een 280 m² vrijstaande villa. Geïnstalleerd met een modulerende NIBE F2120 luchtwarmtepomp, gekoppeld aan 14 zones vloerverwarming en actieve topkoeling voor de slaapkamers.
+          </p>
+<div class="flex flex-wrap items-center gap-space-xs text-on-primary font-label-md text-label-md">
+<span class="px-space-sm py-0.5 rounded bg-surface-dark text-secondary">NIBE F2120-16</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-dark text-secondary">COP 5.3</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-dark text-secondary">Vloerkoeling Actief</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-dark text-brand-pink-vibrant font-bold">0 m³ Gasverbruik</span>
+</div>
+</div>
+</div>
+<!-- Bento Card 4: ISDE Subsidie Assistent Block (5 cols) -->
+<div class="spotlight-card lg:col-span-5 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-xl" id="subsidie-aanvraag">
+<div>
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div class="font-label-tag text-label-tag text-tertiary-fixed font-bold uppercase tracking-widest mb-1">
+            RVO Erkend Installateur
+          </div>
+<h3 class="font-headline-md text-headline-md text-on-primary font-bold mb-space-xs">
+            Zolano ISDE Subsidie Service
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary mb-space-md leading-relaxed">
+            U heeft recht op subsidie variërend van €2.100 tot €3.750 per warmtepomp. Wij leveren alle benodigde meldcodes, facturen en specificaties kant-en-klaar aan en dienen desgewenst de volledige aanvraag voor u in bij de Rijksoverheid.
+          </p>
+<div class="space-y-space-xs mb-space-md">
+<div class="flex items-center gap-2 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]">check_circle</span>
+<span>100% acceptatiegarantie op goedgekeurde installaties</span>
+</div>
+<div class="flex items-center gap-2 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]">check_circle</span>
+<span>Geen administratieve rompslomp voor de woningeigenaar</span>
+</div>
+<div class="flex items-center gap-2 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]">check_circle</span>
+<span>Uitkering rechtstreeks op uw privérekening</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark p-space-md rounded">
+<div class="flex items-center justify-between font-label-md text-label-md text-on-primary font-bold mb-1">
+<span>Gemiddelde subsidie 2025</span>
+<span class="text-brand-pink-vibrant">€ 2.850,-</span>
+</div>
+<div class="font-body-sm text-body-sm text-secondary">
+            Geldig voor Nibe, Daikin, Mitsubishi &amp; Remeha
+          </div>
+</div>
+</div>
+<!-- Bento Card 5: Merkpartners Logos Wall (Full 12 cols) -->
+<div class="lg:col-span-12 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="max-w-xs text-center md:text-left">
+<div class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold mb-1">Fabrikanten &amp; Kwaliteit</div>
+<div class="font-headline-sm text-headline-sm text-on-primary font-bold">Gecertificeerd Partner</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-space-md lg:gap-space-xl opacity-90">
+<!-- Monochromatic Brand Pills -->
+<div class="px-space-lg py-space-sm bg-surface-dark rounded-full font-headline-sm text-headline-sm tracking-tighter text-on-primary hover:text-brand-pink-vibrant transition-colors cursor-default">
+            DAIKIN
+          </div>
+<div class="px-space-lg py-space-sm bg-surface-dark rounded-full font-headline-sm text-headline-sm tracking-tighter text-on-primary hover:text-brand-pink-vibrant transition-colors cursor-default">
+            NIBE
+          </div>
+<div class="px-space-lg py-space-sm bg-surface-dark rounded-full font-headline-sm text-headline-sm tracking-tighter text-on-primary hover:text-brand-pink-vibrant transition-colors cursor-default">
+            MITSUBISHI ELECTRIC
+          </div>
+<div class="px-space-lg py-space-sm bg-surface-dark rounded-full font-headline-sm text-headline-sm tracking-tighter text-on-primary hover:text-brand-pink-vibrant transition-colors cursor-default">
+            REMEHA
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: STEP-BY-STEP INSTALLATION ROADMAP ("BENEDEN NAAR BOVEN" AANPAK) -->
+<section class="w-full px-margin-mobile lg:px-margin py-space-2xl bg-surface">
+<!-- Header -->
+<div class="max-w-3xl mb-space-xl">
+<div class="inline-flex items-center gap-space-xs text-primary font-label-tag text-label-tag uppercase tracking-widest font-bold mb-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+        Het Zolano Stappenplan
+      </div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface uppercase tracking-tight font-extrabold mb-space-sm">
+        De ‘Beneden naar Boven’ Aanpak
+      </h2>
+<p class="font-body-lg text-body-lg text-secondary">
+        Geen vage aannames of overgedimensioneerde installaties. Wij meten de exacte kilowatt-behoefte van uw pand en begeleiden de complete realisatie van kelder tot daknok.
+      </p>
+</div>
+<!-- 4-Step Interactive Horizontal Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Step 01 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-lg text-headline-lg text-primary-container font-black group-hover:scale-110 transition-transform">01</span>
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">home_pin</span>
+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+            Advies op Locatie
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Onze adviseur inspecteert uw meterkast, huidige leidingwerk, radiatoren en de ideale positie voor de fluisterstille buitenunit (rekening houdend met geluidsnormen van de buren).
+          </p>
+</div>
+<div class="pt-space-md mt-space-md text-primary font-label-tag text-label-tag font-bold uppercase tracking-wider">
+          Gratis &amp; Vrijblijvend
+        </div>
+</div>
+<!-- Step 02 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-lg text-headline-lg text-primary font-black group-hover:scale-110 transition-transform">02</span>
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">calculate</span>
+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+            Warmteverliesberekening
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Met geavanceerde ISSO-software berekenen we per vertrek de transmissieverliezen. Zo voorkomen we pendelgedrag en garanderen we een maximaal seizoensrendement.
+          </p>
+</div>
+<div class="pt-space-md mt-space-md text-primary font-label-tag text-label-tag font-bold uppercase tracking-wider">
+          Exact vermogen (kW)
+        </div>
+</div>
+<!-- Step 03 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-lg text-headline-lg text-primary-container font-black group-hover:scale-110 transition-transform">03</span>
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">handyman</span>
+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+            Vakkundige Montage
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Onze eigen F-gassen gecertificeerde monteurs verzorgen de koeltechnische en hydraulische aansluitingen. Inclusief vuilafscheider, buffervat en trillingsdempende sokkels.
+          </p>
+</div>
+<div class="pt-space-md mt-space-md text-primary font-label-tag text-label-tag font-bold uppercase tracking-wider">
+          BRL 100 gecertificeerd
+        </div>
+</div>
+<!-- Step 04 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-lg text-headline-lg text-primary font-black group-hover:scale-110 transition-transform">04</span>
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">
+            Monitoring &amp; Service
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Uw systeem wordt digitaal verbonden met ons serviceportaal. Eventuele afwijkingen worden op afstand gesignaleerd nog vóór u temperatuurverschil ervaart.
+          </p>
+</div>
+<div class="pt-space-md mt-space-md text-primary font-label-tag text-label-tag font-bold uppercase tracking-wider">
+          24/7 Storingsdienst
+        </div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: HIGH-IMPACT MAGENTA CONVERSION BANNER -->
+<section class="w-full px-margin-mobile lg:px-margin pb-space-2xl" id="offerte">
+<div class="w-full bg-brand-pink-vibrant rounded-xl p-space-lg lg:p-space-2xl text-on-primary shadow-2xl relative overflow-hidden">
+<!-- Decorative background watermark shapes -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-on-primary/10 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-4xl">
+<!-- Certified Badge Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-on-primary text-on-surface font-label-md text-label-md font-bold mb-space-md shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+          Erkend Installateur BRL 100 / F-Gassen
+        </div>
+<h2 class="font-headline-xl lg:font-display-hero text-headline-xl lg:text-display-hero text-on-primary tracking-tighter uppercase font-black mb-space-md leading-none">
+          Klaar voor een gasloze woning of bedrijfspand?
+        </h2>
+<p class="font-body-lg text-body-lg text-on-primary/95 max-w-2xl mb-space-xl leading-relaxed">
+          Ontvang binnen 48 uur een op maat gemaakt installatievoorstel inclusief exacte ISDE-subsidieberekening en terugverdientijd. Liever direct technisch overleg met onze chef-monteur in Barneveld?
+        </p>
+<!-- CTA Buttons Interactivity -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md">
+<a class="px-space-xl py-space-md rounded-full bg-surface-dark text-on-primary font-label-lg text-label-lg hover:bg-surface-dark-elevated transition-all flex items-center justify-center gap-2 group shadow-xl" href="https://wa.me/31342550220" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed">chat</span>
+            WhatsApp Direct met Monteur
+          </a>
+<button class="px-space-xl py-space-md rounded-full bg-on-primary text-primary font-label-lg text-label-lg hover:bg-surface-offwhite transition-all flex items-center justify-center gap-2 shadow-lg" onclick="document.getElementById('quick-calc-dialog').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[20px]">calculate</span>
+            Bereken uw Subsidie &amp; Besparing
+          </button>
+</div>
+<!-- Trust Anchor Badges -->
+<div class="pt-space-xl mt-space-lg flex flex-wrap items-center gap-space-lg text-on-primary/80 font-label-md text-label-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>10 Jaar Fabrieksgarantie</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+<span>Installatie binnen 4 tot 6 weken</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span>Werkgebied: Barneveld, Amersfoort, Ede, Apeldoorn</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- QUICK CALCULATOR MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 bg-surface-dark/80 backdrop-blur-sm hidden flex items-center justify-center p-space-md" id="quick-calc-dialog">
+<div class="bg-surface-container-lowest rounded-lg max-w-lg w-full p-space-lg shadow-2xl relative">
+<button class="absolute top-space-md right-space-md text-secondary hover:text-on-surface" onclick="document.getElementById('quick-calc-dialog').classList.add('hidden')">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold mb-1">
+        Warmtepomp Subsidie Calculator
+      </div>
+<p class="font-body-sm text-body-sm text-secondary mb-space-md">
+        Bereken direct uw indicatieve ISDE teruggave voor 2025.
+      </p>
+<div class="space-y-space-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-bold mb-1">Woningtype</label>
+<select class="w-full p-space-sm rounded bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:ring-2 focus:ring-primary-container" id="calc-type">
+<option value="hybride">Bestaande woning (Hybride 4kW - 6kW)</option>
+<option value="electric">Vrijstaande woning / Villa (All-Electric 8kW - 12kW)</option>
+<option value="nieuwbouw">Nieuwbouwwoning (Bodem/Lucht 6kW)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-bold mb-1">Huidig Gasverbruik per jaar</label>
+<input class="w-full p-space-sm rounded bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:ring-2 focus:ring-primary-container" id="calc-gas" type="number" value="1800"/>
+<span class="text-secondary font-label-tag text-label-tag">Gemiddeld Nederlands huishouden: 1.400 - 1.900 m³</span>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-1">
+<div class="flex justify-between items-center text-on-surface font-body-sm text-body-sm">
+<span>Verwachte ISDE Subsidie:</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="result-subsidy">€ 2.775,-</span>
+</div>
+<div class="flex justify-between items-center text-on-surface font-body-sm text-body-sm">
+<span>Geschatte Besparing / Jaar:</span>
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold" id="result-savings">€ 1.420,-</span>
+</div>
+</div>
+<button class="w-full py-space-sm rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg font-bold hover:bg-surface-dark transition-colors" onclick="document.getElementById('quick-calc-dialog').classList.add('hidden'); alert('Dank! Een Zolano adviseur neemt contact op met uw gespecificeerde berekening.');">
+          Offerte met Subsidie Ontvangen
+        </button>
+</div>
+</div>
+</div>
+<!-- SCRIPT FOR DYNAMIC CALCULATOR -->
+<script>
+    (function() {
+      const typeSelect = document.getElementById('calc-type');
+      const gasInput = document.getElementById('calc-gas');
+      const subsidyDisplay = document.getElementById('result-subsidy');
+      const savingsDisplay = document.getElementById('result-savings');
+
+      function updateCalc() {
+        if (!typeSelect || !gasInput) return;
+        const type = typeSelect.value;
+        const gas = parseFloat(gasInput.value) || 1500;
+
+        let subsidy = 2775;
+        let savingRatio = 0.65;
+
+        if (type === 'electric') {
+          subsidy = 3600;
+          savingRatio = 0.90;
+        } else if (type === 'nieuwbouw') {
+          subsidy = 2400;
+          savingRatio = 0.70;
+        }
+
+        const gasPrijs = 1.35; // Gem. gasprijs per m3
+        const annualSavings = Math.round(gas * gasPrijs * savingRatio);
+
+        if (subsidyDisplay) subsidyDisplay.innerHTML = '&euro; ' + subsidy.toLocaleString('nl-NL') + ',-';
+        if (savingsDisplay) savingsDisplay.innerHTML = '&euro; ' + annualSavings.toLocaleString('nl-NL') + ',-';
+      }
+
+      if (typeSelect && gasInput) {
+        typeSelect.addEventListener('change', updateCalc);
+        gasInput.addEventListener('input', updateCalc);
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-dark text-on-primary pt-space-2xl pb-space-xl"><div class="w-full px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-2xl"><div class="lg:col-span-5 flex flex-col justify-between"><div class="max-w-md"><div class="flex items-center gap-1 mb-space-md"><span class="font-headline-lg text-headline-lg text-on-primary">Zolano</span><span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span></div><p class="text-secondary font-body-md text-body-md mb-space-lg leading-relaxed">Gecertificeerde installatietechniek voor verwarming, koeling, ventilatie en sanitair. Duurzame klimaatoplossingen gerealiseerd met Nederlandse precisie.</p><div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-dark-elevated"><span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span><span class="text-on-primary font-label-md text-label-md">BRL 100 Gecertificeerd Installateur</span></div></div></div><div class="lg:col-span-3"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Diensten</div><ul class="space-y-space-xs"><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Warmtepompen &amp; Hybride</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Airconditioning &amp; Koeling</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Ventilatie &amp; WTW-systemen</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Sanitair &amp; Badkamers</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Onderhoud &amp; Servicecontracten</li></ul></div><div class="lg:col-span-4"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Contact &amp; Locatie</div><div class="space-y-space-xs text-secondary font-body-md text-body-md"><p class="text-on-primary font-bold">Zolano Installaties B.V.</p><p>Nijverheidsweg 14</p><p>3771 ME Barneveld</p><div class="pt-space-xs flex flex-col gap-1"><p class="text-on-primary font-bold">0342 - 550 220</p><p class="text-brand-pink-vibrant font-semibold hover:underline cursor-pointer">WhatsApp direct met een monteur</p><p>info@zolano-installaties.nl</p></div></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-secondary font-label-md text-label-md"><div>© 2025 Zolano Installaties B.V. Alle rechten voorbehouden.</div><div class="flex items-center gap-space-lg"><span class="hover:text-on-primary transition-colors cursor-pointer">Privacybeleid</span><span class="hover:text-on-primary transition-colors cursor-pointer">Algemene Voorwaarden</span><span class="hover:text-on-primary transition-colors cursor-pointer">Cookies</span></div></div></div></footer><script>
+document.querySelectorAll('.spotlight-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+</script></body></html>

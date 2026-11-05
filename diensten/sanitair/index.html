@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 25, 110, 0.18), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(230, 25, 110, 0.4);
+}
+.spotlight-card > * {
+  position: relative;
+  z-index: 2;
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-primary-fixed-variant": "#8f0040",
+        "on-primary-fixed": "#3f0018",
+        "error": "#ba1a1a",
+        "secondary": "#5f5e60",
+        "inverse-primary": "#ffb1c2",
+        "on-error-container": "#93000a",
+        "on-tertiary": "#ffffff",
+        "surface-offwhite": "#F9F9F9",
+        "surface": "#fcf8fb",
+        "surface-container-lowest": "#ffffff",
+        "brand-pink-vibrant": "#FF007A",
+        "primary-fixed-dim": "#ffb1c2",
+        "background": "#fcf8fb",
+        "on-surface": "#1b1b1d",
+        "border-subtle-light": "#E4E4E7",
+        "surface-container-low": "#f6f3f5",
+        "surface-variant": "#e5e1e4",
+        "outline-variant": "#e3bdc4",
+        "on-tertiary-fixed": "#002107",
+        "surface-dark-elevated": "#18181B",
+        "secondary-container": "#e5e1e4",
+        "on-secondary-container": "#656466",
+        "secondary-fixed-dim": "#c8c6c8",
+        "surface-container": "#f0edef",
+        "surface-dim": "#dcd9dc",
+        "inverse-on-surface": "#f3f0f2",
+        "surface-light": "#FFFFFF",
+        "surface-dark": "#0C0C0E",
+        "on-primary-container": "#fffbff",
+        "tertiary": "#006b27",
+        "on-secondary-fixed": "#1b1b1d",
+        "on-surface-variant": "#5b3f45",
+        "on-secondary-fixed-variant": "#474649",
+        "tertiary-fixed": "#89fb95",
+        "secondary-fixed": "#e5e1e4",
+        "on-tertiary-fixed-variant": "#00531c",
+        "primary-fixed": "#ffd9e0",
+        "surface-container-high": "#eae7ea",
+        "primary": "#b70054",
+        "border-subtle-dark": "#27272A",
+        "on-primary": "#ffffff",
+        "surface-bright": "#fcf8fb",
+        "on-secondary": "#ffffff",
+        "on-tertiary-container": "#f7fff2",
+        "primary-container": "#e1136b",
+        "outline": "#8f6f75",
+        "inverse-surface": "#303032",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "tertiary-fixed-dim": "#6dde7c",
+        "on-background": "#1b1b1d",
+        "surface-tint": "#bb0056",
+        "text-muted": "#71717A",
+        "surface-container-highest": "#e5e1e4",
+        "tertiary-container": "#008733"
+      },
+      "borderRadius": {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "margin-mobile": "1.25rem",
+        "space-xs": "0.375rem",
+        "margin": "3rem",
+        "gutter": "1.5rem",
+        "space-2xl": "6rem",
+        "space-md": "1.25rem",
+        "space-xl": "3.5rem",
+        "space-lg": "2rem",
+        "gutter-mobile": "0.75rem"
+      },
+      "fontFamily": {
+        "headline-lg-mobile": [
+          "Epilogue"
+        ],
+        "headline-xl": [
+          "Epilogue"
+        ],
+        "label-md": [
+          "Space Grotesk"
+        ],
+        "body-lg": [
+          "Space Grotesk"
+        ],
+        "label-tag": [
+          "Space Grotesk"
+        ],
+        "label-lg": [
+          "Space Grotesk"
+        ],
+        "display-hero": [
+          "Epilogue"
+        ],
+        "headline-sm": [
+          "Epilogue"
+        ],
+        "body-sm": [
+          "Space Grotesk"
+        ],
+        "display-hero-mobile": [
+          "Epilogue"
+        ],
+        "headline-md": [
+          "Epilogue"
+        ],
+        "body-md": [
+          "Space Grotesk"
+        ],
+        "headline-xl-mobile": [
+          "Epilogue"
+        ],
+        "headline-lg": [
+          "Epilogue"
+        ]
+      },
+      "fontSize": {
+        "headline-lg-mobile": [
+          "28px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-xl": [
+          "56px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "800"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.06em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-tag": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.08em",
+            "fontWeight": "700"
+          }
+        ],
+        "label-lg": [
+          "14px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "700"
+          }
+        ],
+        "display-hero": [
+          "84px",
+          {
+            "lineHeight": "88px",
+            "letterSpacing": "-0.04em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "26px",
+            "letterSpacing": "0em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "display-hero-mobile": [
+          "44px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-md": [
+          "26px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-xl-mobile": [
+          "34px",
+          {
+            "lineHeight": "38px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-lg": [
+          "40px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><div style="position:sticky;top:0;z-index:60;background:#0C0C0E;color:#fff;font-family:Space Grotesk,system-ui,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between"><span><strong style="color:#FF007A">Stitch preview</strong> · Zolano Installaties · project 8904295251056646246</span><span style="opacity:.85"><a href="/prijzen/" style="color:#FF007A;text-decoration:none;font-weight:700">Prijzen &amp; PDF's</a></span></div><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin-mobile lg:px-margin h-20 flex items-center justify-between"><a class="flex items-center gap-1 group" data-path="diensten" href="/diensten/warmtepompen/"><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-extrabold">Zolano</span><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-normal ml-1 hidden sm:inline">Installaties</span><span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-container transition-transform group-hover:scale-125"></span></a><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold shadow-sm"><a aria-current="page" class="px-space-md py-space-xs rounded-full transition-all flex items-center gap-1 bg-primary-container text-on-primary font-bold shadow-sm" data-path="diensten" href="/diensten/warmtepompen/">Diensten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="projecten" href="/projecten/">Projecten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="over-zolano" href="/over/">Over Zolano</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="prijzen" href="/prijzen/">Prijzen</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface flex items-center gap-2" data-path="werken-bij" href="#">Werken bij<span class="w-4 h-4 rounded-full bg-primary-container text-on-primary font-label-tag text-label-tag flex items-center justify-center font-bold">1</span></a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-xs rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-surface-dark hover:text-on-primary transition-all duration-200" data-path="offerte-aanvragen" href="#">Offerte aanvragen</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- 1. Editorial Hero Section -->
+<section class="w-full px-margin-mobile lg:px-margin py-space-xl lg:py-space-2xl bg-surface relative overflow-hidden">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-wrap items-center gap-space-xs mb-space-md">
+<span class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md tracking-wider uppercase">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+          Regio Barneveld &amp; Gelderse Vallei
+        </span>
+<span class="text-secondary font-label-md text-label-md font-medium">BRL 6000 &amp; VCA Gecertificeerd</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Left Hero Typography & Pills -->
+<div class="lg:col-span-8 flex flex-col justify-between">
+<div>
+<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-on-surface tracking-tighter leading-none mb-space-md">
+              Luxe Sanitair <br class="hidden sm:inline"/>
+<span class="relative inline-block text-primary-container">
+<span class="relative z-10">&amp; Vakkundig</span>
+<span class="absolute left-0 bottom-2 w-full h-3 lg:h-5 bg-primary-fixed -z-0 -rotate-1 rounded-sm"></span>
+</span>
+              Loodgieterswerk.
+            </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl leading-relaxed mb-space-lg">
+              Van high-end turn-key badkamerrenovaties met sunshower en vrijstaande baden tot onzichtbaar leidingwerk, kalkvrije waterontharders en energiezuinige warmwateroplossingen. Gerealiseerd met Barneveldse nuchterheid en millimeterprecisie.
+            </p>
+</div>
+<!-- Service Tags / Pills -->
+<div class="flex flex-wrap gap-2 pt-space-xs">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-lg text-label-lg transition-transform hover:-translate-y-0.5 cursor-default">Complete Badkamerrenovatie</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-lg text-label-lg transition-transform hover:-translate-y-0.5 cursor-default">Inloopdouches &amp; Sunshowers</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-lg text-label-lg transition-transform hover:-translate-y-0.5 cursor-default">Waterontharders</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-lg text-label-lg transition-transform hover:-translate-y-0.5 cursor-default">Afvoer- en Leidingtechniek</span>
+</div>
+</div>
+<!-- Right Bento Accent Block -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-primary-container rounded-lg p-space-lg text-on-primary flex flex-col justify-between relative overflow-hidden shadow-xl min-h-[300px]">
+<div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-primary-fixed-dim/20 blur-2xl pointer-events-none"></div>
+<div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-on-primary/15 text-on-primary font-label-tag text-label-tag uppercase tracking-widest mb-space-md">
+                Kwaliteitsgarantie
+              </div>
+<div class="font-display-hero text-headline-xl lg:text-[64px] font-black leading-none mb-1">
+                2016
+              </div>
+<div class="font-headline-sm text-headline-sm text-on-primary font-semibold mb-space-sm">
+                Vakmanschap Sinds 2016
+              </div>
+<p class="font-body-md text-body-md text-on-primary/90 leading-snug">
+                Geen onderaannemersroulette. Eén vast aanspreekpunt vanaf de eerste 3D-schets tot de laatste voeg en afdichting.
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-2xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md font-bold tracking-wide">100% Oplevergarantie</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-on-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-xl">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Quick stat card -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm flex items-center justify-between">
+<div>
+<div class="font-label-tag text-label-tag uppercase text-secondary font-bold">Actief in de regio</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-extrabold">Barneveld &amp; omstreken</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">location_on</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Dark Bento Grid: Services, Case Highlight, Loodgieterswerk, Merken -->
+<section class="w-full bg-surface-dark text-on-primary py-space-2xl px-margin-mobile lg:px-margin">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary-fixed-dim font-bold block mb-space-xs">
+            02 / Specialismen &amp; Portfolio
+          </span>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-primary tracking-tight font-extrabold">
+            Geïntegreerde Sanitaire Perfectie.
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-secondary max-w-md">
+          Waar architectonisch sanitairdesign samenkomt met onberispelijke werktuigbouwkundige installaties.
+        </p>
+</div>
+<!-- Bento Grid (3-column asymmetric layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter">
+<!-- Bento Card 1: Compleet Badkamerconcept (Span 7 cols) -->
+<div class="spotlight-card lg:col-span-7 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between group overflow-hidden relative shadow-lg">
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-on-primary/10 text-on-primary font-label-tag text-label-tag uppercase tracking-wider font-semibold">
+                Turn-key realisatie
+              </span>
+<span class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-base">bathtub</span>
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary font-bold mb-space-xs">
+              Compleet Badkamerconcept
+            </h3>
+<p class="font-body-md text-body-md text-secondary leading-relaxed mb-space-md max-w-xl">
+              Van secure sloopwerkzaamheden en het herberekenen van standleidingen tot XXL tegelwerk, inbouwnissen en high-end sanitairmontage. Alles uitgevoerd onder één regie, zonder vertraging tussen verschillende disciplines.
+            </p>
+</div>
+<div class="grid grid-cols-3 gap-space-sm pt-space-md mt-space-md bg-surface-dark rounded-DEFAULT p-space-md">
+<div>
+<div class="font-label-tag text-label-tag text-secondary uppercase">Leidingen</div>
+<div class="font-label-lg text-label-lg text-on-primary font-bold">100% Inbouw</div>
+</div>
+<div>
+<div class="font-label-tag text-label-tag text-secondary uppercase">Doorlooptijd</div>
+<div class="font-label-lg text-label-lg text-on-primary font-bold">10-14 Dagen</div>
+</div>
+<div>
+<div class="font-label-tag text-label-tag text-secondary uppercase">Garantie</div>
+<div class="font-label-lg text-label-lg text-on-primary font-bold">5 Jaar All-in</div>
+</div>
+</div>
+</div>
+<!-- Bento Card 2: Waterbehandeling & Waterontharders (Span 5 cols) -->
+<div class="spotlight-card lg:col-span-5 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-tertiary/20 blur-xl"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-on-primary/10 text-on-primary font-label-tag text-label-tag uppercase tracking-wider font-semibold">
+                Waterbehandeling
+              </span>
+<span class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-base">water_drop</span>
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary font-bold mb-space-xs">
+              Kalkvrij Water &amp; Ontharders
+            </h3>
+<p class="font-body-md text-body-md text-secondary leading-relaxed mb-space-md">
+              Bescherm uw exclusieve kranen, sunshowers en warmtepompen tegen kalkafzetting. Een professioneel geïnstalleerde ionenwisselaar verdubbelt de levensduur van uw sanitaire installaties en bespaart tot 15% op verwarmingsenergie.
+            </p>
+</div>
+<!-- Micro visual: kalkreductie gauge -->
+<div class="bg-surface-dark rounded-DEFAULT p-space-md flex items-center gap-space-md">
+<svg class="w-14 h-14 shrink-0 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-dark-elevated" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-tertiary-fixed" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="4"></path>
+</svg>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-primary font-black">0° dH Kalk</div>
+<div class="font-body-sm text-body-sm text-secondary">Zijdezacht water voor huid en leidingen</div>
+</div>
+</div>
+</div>
+<!-- Bento Card 3: Featured Case Study (Span 8 cols) -->
+<div class="spotlight-card lg:col-span-8 bg-surface-dark-elevated rounded-lg overflow-hidden shadow-lg flex flex-col md:flex-row group">
+<div class="md:w-1/2 relative min-h-[280px]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern luxury master bathroom inside an upscale Barneveld residence featuring a freestanding matte black soaking tub, brushed brass Hotbath wall-mounted faucets, large format terrazzo tiles, backlit mirrors, and warm indirect architectural cove lighting, hyperrealistic architectural photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxzbltcNRTsrLJWfR4NCAd6cOTIWoCTxnmywQ9UBysZ0EAsyFz9IHhkmgcJXcTNHGzLgyeqb86goOjxGbFfCE17v4pHJfj9UH8PelljFFPKxQsN20HxO0rFE7sLGn2uelxLWbE9rXvJ5VV7-l434oP0h_wS3dvOLWoRJ8NzNxCRm5iAUo-LShW9S9mEWs9AmV-sW3ewEU7hBCerF-aP_pGoK0CNqNYHWZDY55KcTU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark via-transparent to-transparent md:hidden"></div>
+</div>
+<div class="md:w-1/2 p-space-lg flex flex-col justify-between bg-surface-dark-elevated">
+<div>
+<div class="flex items-center gap-2 mb-space-sm">
+<span class="w-2 h-2 rounded-full bg-brand-pink-vibrant"></span>
+<span class="font-label-tag text-label-tag uppercase text-secondary font-bold tracking-wider">Uitgelicht Project</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-primary font-bold mb-space-xs">
+                Wellness Badkamer Landhuis Barneveld
+              </h4>
+<p class="font-body-md text-body-md text-secondary leading-relaxed mb-space-md">
+                Turn-key realisatie inclusief vrijstaand ligbad met vloerinloop, Hotbath kranen in geborsteld messing en een Geberit AquaClean Mera douche-wc met geurzuivering en touchbediening.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-md text-label-md text-primary-fixed-dim font-bold">Oplevering: November 2024</span>
+<span class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center text-on-primary group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-base">north_east</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Bento Card 4: Loodgieterswerk & Zinkwerk (Span 4 cols) -->
+<div class="spotlight-card lg:col-span-4 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-on-primary/10 text-on-primary font-label-tag text-label-tag uppercase tracking-wider font-semibold">
+                Constructie &amp; Buitenwerk
+              </span>
+<span class="w-8 h-8 rounded-full bg-surface-dark text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-base">plumbing</span>
+</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-primary font-bold mb-space-xs">
+              Loodgieters- &amp; Zinkwerk
+            </h4>
+<p class="font-body-md text-body-md text-secondary leading-relaxed mb-space-md">
+              Degelijke dakgoten in ambachtelijk zink, expansiebestendige standleidingen, camera-inspectie en storingsvrije riooltechniek conform NEN 3215.
+            </p>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-base">check_circle</span>
+<span>Zinken dakgoten &amp; kilgoten op maat</span>
+</div>
+<div class="flex items-center gap-2 text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-base">check_circle</span>
+<span>Geluidsarme Geberit Silent-PP afvoeren</span>
+</div>
+<div class="flex items-center gap-2 text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-base">check_circle</span>
+<span>24/7 Spoedservice bij acute lekkages</span>
+</div>
+</div>
+</div>
+<!-- Bento Card 5: Sanitaire designmerken wall (Full Span 12 cols) -->
+<div class="spotlight-card lg:col-span-12 bg-surface-dark rounded-lg p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<span class="font-label-tag text-label-tag uppercase text-secondary font-bold tracking-widest block mb-1">
+                Geselecteerde A-Kwaliteit
+              </span>
+<h4 class="font-headline-sm text-headline-sm text-on-primary font-bold">
+                Sanitairmerken die Wij Voeren &amp; Onderhouden
+              </h4>
+</div>
+<!-- Brand pills with subtle hover -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-space-md py-space-xs rounded-full bg-surface-dark-elevated text-on-primary font-label-lg text-label-lg font-bold">GEBERIT</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-dark-elevated text-on-primary font-label-lg text-label-lg font-bold">GROHE</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-dark-elevated text-on-primary font-label-lg text-label-lg font-bold">HOTBATH</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-dark-elevated text-on-primary font-label-lg text-label-lg font-bold">VILLEROY &amp; BOCH</span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-dark-elevated text-on-primary font-label-lg text-label-lg font-bold">HANSGROHE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Onze Werkwijze: 3-Stappen Workflow -->
+<section class="w-full py-space-2xl px-margin-mobile lg:px-margin bg-surface">
+<div class="max-w-[1440px] mx-auto">
+<div class="max-w-2xl mb-space-xl">
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary-container font-bold block mb-space-xs">
+          03 / Helder &amp; Zorgeloos
+        </span>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface tracking-tight font-extrabold">
+          Onze Werkwijze in 3 Vaste Stappen.
+        </h2>
+<p class="font-body-lg text-body-lg text-secondary mt-space-sm leading-relaxed">
+          Geen onvoorziene meerwerken achteraf. Wij werken met een vaste projectfasering, strakke planning en Barneveldse nuchterheid.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stap 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-lg">
+<span class="font-display-hero text-headline-xl text-surface-container-highest group-hover:text-primary-container transition-colors font-black">
+                01
+              </span>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">design_services</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-xs">
+              3D Ontwerp &amp; Sanitairselectie
+            </h3>
+<p class="font-body-md text-body-md text-secondary leading-relaxed">
+              We starten met een grondige inmeting bij u thuis. Vervolgens bepalen we samen de indeling, kranen, tegels en sunshower opties in een realistisch 3D-model met sluitende offerte.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md">
+<span class="font-label-tag text-label-tag text-secondary uppercase font-bold tracking-wider">Fase 1: Transparantie vooraf</span>
+</div>
+</div>
+<!-- Stap 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-lg">
+<span class="font-display-hero text-headline-xl text-surface-container-highest group-hover:text-primary-container transition-colors font-black">
+                02
+              </span>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">home_repair_service</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-xs">
+              Leidingrenovatie &amp; Ruwbouw
+            </h3>
+<p class="font-body-md text-body-md text-secondary leading-relaxed">
+              Verouderde loden of koperen leidingen worden vervangen door naadloze meerlagenbuizen. We frezen sleuven, verplaatsen afvoeren en storten waterdichte afdekvloeren.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md">
+<span class="font-label-tag text-label-tag text-secondary uppercase font-bold tracking-wider">Fase 2: Degelijke fundering</span>
+</div>
+</div>
+<!-- Stap 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-lg">
+<span class="font-display-hero text-headline-xl text-surface-container-highest group-hover:text-primary-container transition-colors font-black">
+                03
+              </span>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mb-space-xs">
+              Afmontage, Kitwerk &amp; Garantie
+            </h3>
+<p class="font-body-md text-body-md text-secondary leading-relaxed">
+              Met uiterste precisie monteren we kranen, glazen douchewanden en meubels. Na professioneel elastisch kitwerk en een druktest leveren we uw droombadkamer bezemschoon op.
+            </p>
+</div>
+<div class="pt-space-md mt-space-md">
+<span class="font-label-tag text-label-tag text-secondary uppercase font-bold tracking-wider">Fase 3: Oplevergarantie</span>
+</div>
+</div>
+</div>
+<!-- Detail callout banner inside werkwijze -->
+<div class="mt-space-lg bg-surface-container p-space-md rounded-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface">shield</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium">
+            Alle leiding- en sanitairinstallaties worden uitgevoerd volgens de geldende NEN 1006 drinkwaternormen en voorzien van Kiwa-keur.
+          </p>
+</div>
+<a class="shrink-0 font-label-lg text-label-lg font-bold text-primary-container hover:underline" href="#">
+          Bekijk onze garantiebepalingen →
+        </a>
+</div>
+</div>
+</section>
+<!-- 4. High-impact Magenta CTA Banner -->
+<section class="w-full px-margin-mobile lg:px-margin pb-space-2xl bg-surface">
+<div class="max-w-[1440px] mx-auto bg-primary-container rounded-lg p-space-lg lg:p-space-2xl text-on-primary relative overflow-hidden shadow-2xl">
+<!-- Decorative background blur elements -->
+<div class="absolute -right-20 -top-20 w-96 h-96 bg-brand-pink-vibrant/40 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-72 h-72 bg-on-primary-fixed/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-4xl">
+<div class="inline-flex items-center gap-2 px-space-md py-1 rounded-full bg-on-primary/15 text-on-primary font-label-tag text-label-tag uppercase tracking-widest font-bold mb-space-md">
+<span class="w-2 h-2 rounded-full bg-on-primary animate-ping"></span>
+          Direct contact met een sanitairspecialist
+        </div>
+<h2 class="font-display-hero text-headline-xl lg:text-headline-xl text-on-primary tracking-tight font-black leading-tight mb-space-md">
+          Droomt u van een nieuwe badkamer of betrouwbaar leidingwerk?
+        </h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-2xl leading-relaxed mb-space-xl">
+          Kom kennismaken bij ons op kantoor aan de Nijverheidsweg in Barneveld of plan direct een vrijblijvende inspectie op locatie. Binnen 48 uur ontvangt u een heldere technische calculatie.
+        </p>
+<!-- CTA Buttons Pairing -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md">
+<a class="px-space-xl py-space-md rounded-full bg-surface-dark text-on-primary font-label-lg text-label-lg font-bold text-center hover:bg-surface-dark-elevated transition-colors shadow-lg flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+            Plan een sanitairadvies
+          </a>
+<a class="px-space-xl py-space-md rounded-full bg-on-primary text-on-surface font-label-lg text-label-lg font-bold text-center hover:bg-surface-offwhite transition-colors shadow-sm flex items-center justify-center gap-2" href="https://wa.me/31342550220" target="_blank">
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">chat</span>
+            WhatsApp direct met een monteur
+          </a>
+</div>
+<!-- Contact Micro-metadata -->
+<div class="pt-space-xl flex flex-wrap items-center gap-space-lg text-on-primary/80 font-label-md text-label-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg">call</span>
+<span>0342 - 550 220</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>Ma t/m Vr: 07:30 - 17:00</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg">pin_drop</span>
+<span>Barneveld, Ede, Amersfoort &amp; omstreken</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-dark text-on-primary pt-space-2xl pb-space-xl"><div class="w-full px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-2xl"><div class="lg:col-span-5 flex flex-col justify-between"><div class="max-w-md"><div class="flex items-center gap-1 mb-space-md"><span class="font-headline-lg text-headline-lg text-on-primary">Zolano</span><span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span></div><p class="text-secondary font-body-md text-body-md mb-space-lg leading-relaxed">Gecertificeerde installatietechniek voor verwarming, koeling, ventilatie en sanitair. Duurzame klimaatoplossingen gerealiseerd met Nederlandse precisie.</p><div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-dark-elevated"><span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span><span class="text-on-primary font-label-md text-label-md">BRL 100 Gecertificeerd Installateur</span></div></div></div><div class="lg:col-span-3"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Diensten</div><ul class="space-y-space-xs"><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Warmtepompen &amp; Hybride</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Airconditioning &amp; Koeling</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Ventilatie &amp; WTW-systemen</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Sanitair &amp; Badkamers</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Onderhoud &amp; Servicecontracten</li></ul></div><div class="lg:col-span-4"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Contact &amp; Locatie</div><div class="space-y-space-xs text-secondary font-body-md text-body-md"><p class="text-on-primary font-bold">Zolano Installaties B.V.</p><p>Nijverheidsweg 14</p><p>3771 ME Barneveld</p><div class="pt-space-xs flex flex-col gap-1"><p class="text-on-primary font-bold">0342 - 550 220</p><p class="text-brand-pink-vibrant font-semibold hover:underline cursor-pointer">WhatsApp direct met een monteur</p><p>info@zolano-installaties.nl</p></div></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-secondary font-label-md text-label-md"><div>© 2025 Zolano Installaties B.V. Alle rechten voorbehouden.</div><div class="flex items-center gap-space-lg"><span class="hover:text-on-primary transition-colors cursor-pointer">Privacybeleid</span><span class="hover:text-on-primary transition-colors cursor-pointer">Algemene Voorwaarden</span><span class="hover:text-on-primary transition-colors cursor-pointer">Cookies</span></div></div></div></footer><script>
+document.querySelectorAll('.spotlight-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+</script></body></html>
