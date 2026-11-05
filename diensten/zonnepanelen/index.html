@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 25, 110, 0.18), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+.spotlight-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(230, 25, 110, 0.4);
+}
+.spotlight-card > * {
+  position: relative;
+  z-index: 2;
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-primary-fixed-variant": "#8f0040",
+        "on-primary-fixed": "#3f0018",
+        "error": "#ba1a1a",
+        "secondary": "#5f5e60",
+        "inverse-primary": "#ffb1c2",
+        "on-error-container": "#93000a",
+        "on-tertiary": "#ffffff",
+        "surface-offwhite": "#F9F9F9",
+        "surface": "#fcf8fb",
+        "surface-container-lowest": "#ffffff",
+        "brand-pink-vibrant": "#FF007A",
+        "primary-fixed-dim": "#ffb1c2",
+        "background": "#fcf8fb",
+        "on-surface": "#1b1b1d",
+        "border-subtle-light": "#E4E4E7",
+        "surface-container-low": "#f6f3f5",
+        "surface-variant": "#e5e1e4",
+        "outline-variant": "#e3bdc4",
+        "on-tertiary-fixed": "#002107",
+        "surface-dark-elevated": "#18181B",
+        "secondary-container": "#e5e1e4",
+        "on-secondary-container": "#656466",
+        "secondary-fixed-dim": "#c8c6c8",
+        "surface-container": "#f0edef",
+        "surface-dim": "#dcd9dc",
+        "inverse-on-surface": "#f3f0f2",
+        "surface-light": "#FFFFFF",
+        "surface-dark": "#0C0C0E",
+        "on-primary-container": "#fffbff",
+        "tertiary": "#006b27",
+        "on-secondary-fixed": "#1b1b1d",
+        "on-surface-variant": "#5b3f45",
+        "on-secondary-fixed-variant": "#474649",
+        "tertiary-fixed": "#89fb95",
+        "secondary-fixed": "#e5e1e4",
+        "on-tertiary-fixed-variant": "#00531c",
+        "primary-fixed": "#ffd9e0",
+        "surface-container-high": "#eae7ea",
+        "primary": "#b70054",
+        "border-subtle-dark": "#27272A",
+        "on-primary": "#ffffff",
+        "surface-bright": "#fcf8fb",
+        "on-secondary": "#ffffff",
+        "on-tertiary-container": "#f7fff2",
+        "primary-container": "#e1136b",
+        "outline": "#8f6f75",
+        "inverse-surface": "#303032",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "tertiary-fixed-dim": "#6dde7c",
+        "on-background": "#1b1b1d",
+        "surface-tint": "#bb0056",
+        "text-muted": "#71717A",
+        "surface-container-highest": "#e5e1e4",
+        "tertiary-container": "#008733"
+      },
+      "borderRadius": {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-sm": "0.75rem",
+        "margin-mobile": "1.25rem",
+        "space-xs": "0.375rem",
+        "margin": "3rem",
+        "gutter": "1.5rem",
+        "space-2xl": "6rem",
+        "space-md": "1.25rem",
+        "space-xl": "3.5rem",
+        "space-lg": "2rem",
+        "gutter-mobile": "0.75rem"
+      },
+      "fontFamily": {
+        "headline-lg-mobile": [
+          "Epilogue"
+        ],
+        "headline-xl": [
+          "Epilogue"
+        ],
+        "label-md": [
+          "Space Grotesk"
+        ],
+        "body-lg": [
+          "Space Grotesk"
+        ],
+        "label-tag": [
+          "Space Grotesk"
+        ],
+        "label-lg": [
+          "Space Grotesk"
+        ],
+        "display-hero": [
+          "Epilogue"
+        ],
+        "headline-sm": [
+          "Epilogue"
+        ],
+        "body-sm": [
+          "Space Grotesk"
+        ],
+        "display-hero-mobile": [
+          "Epilogue"
+        ],
+        "headline-md": [
+          "Epilogue"
+        ],
+        "body-md": [
+          "Space Grotesk"
+        ],
+        "headline-xl-mobile": [
+          "Epilogue"
+        ],
+        "headline-lg": [
+          "Epilogue"
+        ]
+      },
+      "fontSize": {
+        "headline-lg-mobile": [
+          "28px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-xl": [
+          "56px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "800"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.06em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-tag": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.08em",
+            "fontWeight": "700"
+          }
+        ],
+        "label-lg": [
+          "14px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "700"
+          }
+        ],
+        "display-hero": [
+          "84px",
+          {
+            "lineHeight": "88px",
+            "letterSpacing": "-0.04em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "26px",
+            "letterSpacing": "0em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "400"
+          }
+        ],
+        "display-hero-mobile": [
+          "44px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.03em",
+            "fontWeight": "900"
+          }
+        ],
+        "headline-md": [
+          "26px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-xl-mobile": [
+          "34px",
+          {
+            "lineHeight": "38px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-lg": [
+          "40px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><div style="position:sticky;top:0;z-index:60;background:#0C0C0E;color:#fff;font-family:Space Grotesk,system-ui,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between"><span><strong style="color:#FF007A">Stitch preview</strong> · Zolano Installaties · project 8904295251056646246</span><span style="opacity:.85"><a href="/prijzen/" style="color:#FF007A;text-decoration:none;font-weight:700">Prijzen &amp; PDF's</a></span></div><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin-mobile lg:px-margin h-20 flex items-center justify-between"><a class="flex items-center gap-1 group" data-path="diensten" href="/diensten/warmtepompen/"><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-extrabold">Zolano</span><span class="font-headline-md text-headline-md tracking-tight text-on-surface font-normal ml-1 hidden sm:inline">Installaties</span><span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-container transition-transform group-hover:scale-125"></span></a><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold shadow-sm"><a aria-current="page" class="px-space-md py-space-xs rounded-full transition-all flex items-center gap-1 bg-primary-container text-on-primary font-bold shadow-sm" data-path="diensten" href="/diensten/warmtepompen/">Diensten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="projecten" href="/projecten/">Projecten</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface" data-path="over-zolano" href="/over/">Over Zolano</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors" data-path="prijzen" href="/prijzen/">Prijzen</a><a class="px-space-md py-space-xs rounded-full text-on-surface-variant font-label-lg text-label-lg transition-all hover:bg-surface-container-high hover:text-on-surface flex items-center gap-2" data-path="werken-bij" href="#">Werken bij<span class="w-4 h-4 rounded-full bg-primary-container text-on-primary font-label-tag text-label-tag flex items-center justify-center font-bold">1</span></a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-xs rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-surface-dark hover:text-on-primary transition-all duration-200" data-path="offerte-aanvragen" href="#">Offerte aanvragen</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- SECTION 1: EDITORIAL HERO -->
+<section class="relative w-full px-margin-mobile lg:px-margin py-space-xl lg:py-space-2xl overflow-hidden">
+<div class="absolute -top-32 -left-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 right-0 w-[30rem] h-[30rem] bg-brand-pink-vibrant/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<div class="lg:col-span-7 flex flex-col justify-between">
+<div>
+<div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface mb-space-md">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-tag text-label-tag tracking-wider uppercase text-on-surface-variant">Regio Midden-Nederland • Barneveld</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl tracking-tight text-on-surface mb-space-md">
+            Zonnepanelen &amp; <br/>
+<span class="relative inline-block text-primary-container">
+              Slimme Opslag
+              <span class="absolute bottom-1 left-0 right-0 h-2 bg-primary-fixed/60 -z-10 transform -rotate-1"></span>
+</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-space-lg leading-relaxed">
+            Rendementszekere PV-installaties en geavanceerde batterijtechniek voor residentiële en grootschalige daken in Gelderland. Doorgerekend met Nederlandse installatieprecisie en NEN 1010 opleveringsgarantie.
+          </p>
+<div class="flex flex-wrap gap-space-xs mb-space-xl">
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">
+              Glas-Glas Zonnepanelen
+            </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">
+              Thuisbatterijen &amp; Enphase
+            </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">
+              SolarEdge Optimizers
+            </span>
+<span class="px-space-md py-space-xs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">
+              Dynamische Energiecontracten
+            </span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-space-md">
+<a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-sm rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-surface-dark transition-all" href="#dakscan">
+<span class="material-symbols-outlined text-lg">solar_power</span>
+            Gratis Dakscan Aanvragen
+          </a>
+<a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-dark hover:text-on-primary transition-all" href="https://wa.me/31342550220" target="_blank">
+<span class="material-symbols-outlined text-lg">chat</span>
+            Direct WhatsApp Advies
+          </a>
+</div>
+</div>
+<!-- Right Magenta Hero Bento Block -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="relative bg-primary-container text-on-primary p-space-lg rounded-xl overflow-hidden shadow-xl">
+<div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-on-primary/10 pointer-events-none"></div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-tag text-label-tag tracking-widest uppercase bg-surface-dark/20 text-on-primary px-space-sm py-1 rounded-full">
+              Systeem Rendement
+            </span>
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+<span class="font-label-md text-label-md text-on-primary/90">Real-time Grid</span>
+</div>
+</div>
+<div class="mb-space-lg">
+<div class="font-display-hero text-display-hero-mobile lg:text-display-hero leading-none font-black tracking-tighter">
+              98.5%
+            </div>
+<p class="font-label-lg text-label-lg text-on-primary/90 mt-space-xs">
+              Gemeten omvormer- &amp; opslagefficiëntie in actieve installaties
+            </p>
+</div>
+<!-- Micro SVG Sparkline Chart -->
+<div class="bg-surface-dark/25 rounded p-space-sm backdrop-blur-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-primary/80">Opwekprofiel Vandaag (Barneveld)</span>
+<span class="font-label-md text-label-md text-tertiary-fixed font-bold">+18.4 kWh</span>
+</div>
+<svg class="w-full h-16 text-on-primary overflow-visible" fill="none" viewbox="0 0 300 60">
+<path d="M 0 50 Q 50 48, 80 40 T 130 15 T 180 5 T 230 18 T 270 42 L 300 52" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<path d="M 0 50 Q 50 48, 80 40 T 130 15 T 180 5 T 230 18 T 270 42 L 300 52 L 300 60 L 0 60 Z" fill="currentColor" fill-opacity="0.15"></path>
+<circle class="fill-tertiary-fixed" cx="180" cy="5" r="4"></circle>
+</svg>
+<div class="flex justify-between text-on-primary/60 font-label-tag text-label-tag mt-1">
+<span>06:00</span>
+<span>10:00</span>
+<span>13:30 Piek</span>
+<span>18:00</span>
+<span>21:00</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider">Garantietermijn</span>
+<div class="font-headline-md text-headline-md font-extrabold text-on-surface mt-space-xs">30 Jaar</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lineair vermogensbehoud</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider">Subsidie &amp; BTW</span>
+<div class="font-headline-md text-headline-md font-extrabold text-primary-container mt-space-xs">0% Tarief</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">BTW-vrij voor woningen</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: DARK BENTO GRID -->
+<section class="w-full bg-surface-dark text-on-primary py-space-2xl px-margin-mobile lg:px-margin">
+<div class="max-w-4xl mb-space-xl">
+<div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-dark-elevated mb-space-sm">
+<span class="font-label-tag text-label-tag tracking-wider uppercase text-brand-pink-vibrant">Systeemarchitectuur</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-primary tracking-tight">
+        Modulaire Energie-infrastructuur
+      </h2>
+<p class="font-body-lg text-body-lg text-secondary mt-space-xs">
+        Van individuele residentiële opwekking tot industriële peak-shaving en congestie-oplossingen op het middenspanningsnetwerk.
+      </p>
+</div>
+<!-- Bento Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter">
+<!-- Tier 1: Particulier -->
+<div class="spotlight-card lg:col-span-6 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-tag text-label-tag text-brand-pink-vibrant tracking-wider uppercase">Residentieel Segment</span>
+<span class="material-symbols-outlined text-secondary">home</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-primary mb-space-xs">
+            Particulier Zonnestroomsysteem
+          </h3>
+<p class="font-body-md text-body-md text-secondary mb-space-md">
+            Premium all-black panelen gecombineerd met individuele power optimizers. Optimaal rendement bij complexe daken met schoorstenen, dakkapellen of periodieke bomen-schaduw.
+          </p>
+<ul class="space-y-space-xs mb-space-lg text-body-sm font-body-sm text-on-primary/90">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              All-Black N-Type TOPCon technologie (435+ Wp per paneel)
+            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              Paneel-niveau monitoring via intuïtieve mobiele app
+            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              Brandveilige SafeDC automatische spanning-afschakeling
+            </li>
+</ul>
+</div>
+<div class="pt-space-md">
+<div class="h-44 w-full rounded overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Modern architectural Dutch villa in the Veluwe with completely black seamless solar panels installed flush on an anthracite slate roof, soft morning ambient light, ultra realistic architectural photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHqbsvX0xWKA4X4kb_n2Kvma3P_OHW7-IzYXtwbrYzF3suyGICNMSpher_Xh7-KqWhl82tpsEEElbVsjWmlUbYOse9Qj-fcDVzZqm8GwP1dE9xBVSg_nty9bVv2VqNpJZHRHAgXhjFTsNrZCu6OU12jaP_UwOX3LnmVnQug5l0bLzV1J-IdXCIvv5qof5cN0fISYh1NlnlW0z8T3pE3WwqHeZxJpu6yUF02qD48gk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark-elevated via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3 px-space-sm py-1 rounded bg-surface-dark/80 backdrop-blur-md text-on-primary font-label-tag text-label-tag">
+              Residentieel: 14 Panelen • 6.1 kWp Systeem
+            </div>
+</div>
+</div>
+</div>
+<!-- Tier 2: Zakelijk Grootverbruik -->
+<div class="spotlight-card lg:col-span-6 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-label-tag text-label-tag text-tertiary-fixed tracking-wider uppercase">Industrieel &amp; Zakelijk</span>
+<span class="material-symbols-outlined text-secondary">factory</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-primary mb-space-xs">
+            Zakelijk Grootverbruik &amp; SDE++
+          </h3>
+<p class="font-body-md text-body-md text-secondary mb-space-md">
+            Ontworpen voor bedrijfshallen, agrarische daken en distributiecentra. Slimme Oost-West opstellingen die netcongestie mitigeren en aansluiten op transformatorstations.
+          </p>
+<ul class="space-y-space-xs mb-space-lg text-body-sm font-body-sm text-on-primary/90">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              Volledig SDE++ &amp; EIA subsidiebegeleiding en haalbaarheidsstudies
+            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              Lage daklast montageframes met aerodynamische windschermen
+            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              Scope 12 keuringscertificaat direct bij oplevering inbegrepen
+            </li>
+</ul>
+</div>
+<div class="pt-space-md">
+<div class="h-44 w-full rounded overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Vast industrial warehouse roof in Barneveld featuring an engineered East West oriented solar panel configuration with commercial string inverters and steel cable trays, clean high dynamic range industrial photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0aDI8HgQoHtrHQuCxQQ4MZsCcPC4hA_8_51HMUFCERscO8zyPOi9Uwybh-mEjF7FBIs0WO1qbhml4zAHOAIuuTT0MBhEaJKuiLJivLgWqsxCVeiXpQ4tB_GsDa5_-vHIL3SLjDjejkdM8PNiRC5D5QTJG1vFvRYooK5S_ZniMtuFb59kzDlBRSjPqgZCsCj9lfAXvKUTPzvKw5_qTrpcNuAmYinO37KfBa0g_OEM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark-elevated via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3 px-space-sm py-1 rounded bg-surface-dark/80 backdrop-blur-md text-on-primary font-label-tag text-label-tag">
+              Commercieel: Oost-West Dakopstelling
+            </div>
+</div>
+</div>
+</div>
+<!-- Battery & Storage Showcase (8 cols) -->
+<div class="spotlight-card lg:col-span-7 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg relative">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-tag text-label-tag text-brand-pink-vibrant tracking-wider uppercase">Batterij-opslag &amp; EMS</span>
+<span class="material-symbols-outlined text-secondary">battery_charging_full</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-on-primary mb-space-xs">
+            Thuisbatterij &amp; Slimme Accu
+          </h3>
+<p class="font-body-md text-body-md text-secondary max-w-xl mb-space-md">
+            Sla overtollige zonne-energie overdag op voor de avonduren. Ons dynamische Energy Management System (EMS) handelt automatisch op EPEX-spotprijzen en verhandelt op onbalansmarkten.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm py-space-sm">
+<div class="bg-surface-dark rounded p-space-sm">
+<div class="font-headline-sm text-headline-sm text-tertiary-fixed font-bold">85% - 90%</div>
+<div class="font-label-md text-label-md text-secondary mt-1">Eigenverbruik Zonnestroom</div>
+</div>
+<div class="bg-surface-dark rounded p-space-sm">
+<div class="font-headline-sm text-headline-sm text-on-primary font-bold">5 - 30 kWh</div>
+<div class="font-label-md text-label-md text-secondary mt-1">Modulaire Capaciteit</div>
+</div>
+<div class="bg-surface-dark rounded p-space-sm">
+<div class="font-headline-sm text-headline-sm text-brand-pink-vibrant font-bold">Noodstroom</div>
+<div class="font-label-md text-label-md text-secondary mt-1">Volledig Back-up vermogen</div>
+</div>
+</div>
+<div class="mt-space-md p-space-md rounded bg-surface-dark flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-brand-pink-vibrant">auto_graph</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-primary">Dynamische Inkoop Handeling</div>
+<div class="font-body-sm text-body-sm text-secondary">Laadt bij negatieve tarieven, ontlaadt bij piekprijzen.</div>
+</div>
+</div>
+<span class="font-label-tag text-label-tag px-space-sm py-1 rounded bg-surface-dark-elevated text-on-primary uppercase font-bold">
+            Autonoom
+          </span>
+</div>
+</div>
+<!-- Realisatie Case Card (5 cols) -->
+<div class="spotlight-card lg:col-span-5 bg-surface-dark-elevated rounded-lg p-space-lg flex flex-col justify-between shadow-lg relative group">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-tag text-label-tag text-secondary tracking-wider uppercase">Realisatie Referentie</span>
+<span class="material-symbols-outlined text-secondary">verified</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary mb-space-xs">
+            Logistiek Centrum Barneveld
+          </h3>
+<p class="font-body-sm text-body-sm text-secondary mb-space-md">
+            Turn-key zonne-energieproject gerealiseerd binnen 18 werkdagen, inclusief versterkte kabeltracés en koppeling op compactstation.
+          </p>
+<div class="grid grid-cols-2 gap-space-xs mb-space-md">
+<div class="p-space-xs rounded bg-surface-dark">
+<div class="font-headline-sm text-headline-sm text-brand-pink-vibrant font-bold">420</div>
+<div class="font-label-tag text-label-tag text-secondary uppercase">Glas-Glas Panelen</div>
+</div>
+<div class="p-space-xs rounded bg-surface-dark">
+<div class="font-headline-sm text-headline-sm text-tertiary-fixed font-bold">185 kWp</div>
+<div class="font-label-tag text-label-tag text-secondary uppercase">Geïnstalleerd Vermogen</div>
+</div>
+</div>
+</div>
+<div class="relative h-44 rounded overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Elevated drone shot of Logistiek Centrum Barneveld industrial facility showing 420 premium solar panels precisely mounted on commercial roof, clear blue sky with reflection, sharp commercial architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUGI9J-C5eNxGXMKuWsaskxKqc88l2MYNqIomC4NGZ4VOCqhsFrjnwHTOzrgxhYiBdRwBhOa_VadTNlb-MiJPh_8sI0yOU7lK-6PjjP6b7KUXbBhiu_gNSWiTEuEYo-J0nJQARvei_LgOPxusVhnlaHwrYMnrRohFrs-6LNBx2D_B_Yki9MnS4CKbgMa_NjD2VakvLeW1j_abYNlLJP4Oqd8XyuM9YvLxqdZsvcr4"/>
+<div class="absolute inset-0 bg-surface-dark/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-md text-label-md">
+              Bekijk Case Details
+            </span>
+</div>
+</div>
+</div>
+<!-- Partner Logo Strip in Dark Bento (12 cols) -->
+<div class="spotlight-card lg:col-span-12 bg-surface-dark-elevated rounded-lg p-space-lg shadow-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<div class="font-label-tag text-label-tag text-secondary uppercase tracking-widest">Component Partners</div>
+<div class="font-headline-sm text-headline-sm text-on-primary mt-1">Uitsluitend Tier-1 Hardware</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-lg text-on-primary/70">
+<div class="flex items-center gap-2 hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-brand-pink-vibrant">memory</span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight">SolarEdge</span>
+</div>
+<div class="flex items-center gap-2 hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-brand-pink-vibrant">grid_view</span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight">Enphase</span>
+</div>
+<div class="flex items-center gap-2 hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-brand-pink-vibrant">shield</span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight">Meyer Burger</span>
+</div>
+<div class="flex items-center gap-2 hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-brand-pink-vibrant">bolt</span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight">Sungrow</span>
+</div>
+<div class="flex items-center gap-2 hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-brand-pink-vibrant">developer_board</span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight">Huawei Fusion</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: BENEDENBOVEN FLOW VISUAL (INSTALLATION TIMELINE) -->
+<section class="w-full px-margin-mobile lg:px-margin py-space-2xl bg-surface">
+<div class="max-w-3xl mb-space-xl">
+<div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-high mb-space-sm">
+<span class="font-label-tag text-label-tag text-on-surface-variant uppercase tracking-wider">Werkwijze &amp; Kwaliteitsborging</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-surface tracking-tight">
+        Van Dakinspectie tot Realtime Rendement
+      </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs">
+        Geen verrassingen achteraf. Elk zonne-energiesysteem volgt ons strikte vierstappenproces met eigen Zolano gecertificeerde monteurs.
+      </p>
+</div>
+<!-- Stepped Horizontal Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter relative">
+<!-- Step 01 -->
+<div class="bg-surface-container-lowest p-space-lg rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-display-hero text-headline-xl text-surface-container-highest font-black leading-none select-none">01</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface">roofing</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Fysieke Dakinspectie</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Constructie-analyse van dakspanten, type dakbedekking en controle van de meterkastcapaciteit op locatie in Barneveld en omstreken.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-xs font-label-tag text-label-tag uppercase text-text-muted">
+          Doorlooptijd: &lt; 48 uur
+        </div>
+</div>
+<!-- Step 02 -->
+<div class="bg-surface-container-lowest p-space-lg rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-display-hero text-headline-xl text-surface-container-highest font-black leading-none select-none">02</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">view_in_ar</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">3D Legplan &amp; Schaduw</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Geavanceerde computermodellering berekent op de kilowatt nauwkeurig de jaaropbrengst met simulatie van seizoensgebonden schaduwval.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-xs font-label-tag text-label-tag uppercase text-text-muted">
+          PVIQ Software Simulatie
+        </div>
+</div>
+<!-- Step 03 -->
+<div class="bg-surface-container-lowest p-space-lg rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-display-hero text-headline-xl text-surface-container-highest font-black leading-none select-none">03</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface">handyman</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">NEN 1010 Montage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Vakkundige plaatsing conform NEN 1010 en NEN 3140 normen. Onzichtbare kabeldoorvoer en gecertificeerde aardingsbeveiliging.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-xs font-label-tag text-label-tag uppercase text-text-muted">
+          VCA** Gecertificeerd Team
+        </div>
+</div>
+<!-- Step 04 -->
+<div class="bg-surface-container-lowest p-space-lg rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-display-hero text-headline-xl text-surface-container-highest font-black leading-none select-none">04</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container">phonelink_setup</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">App Oplevering</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Inbedrijfstelling van de omvormer, koppeling met uw thuisnetwerk en live instructie voor uw persoonlijke energie-dashboard.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-xs font-label-tag text-label-tag uppercase text-text-muted">
+          24/7 Monitoring Actief
+        </div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: BOLD MAGENTA CTA BANNER -->
+<section class="w-full px-margin-mobile lg:px-margin pb-space-2xl" id="dakscan">
+<div class="w-full bg-primary-container text-on-primary rounded-xl p-space-lg lg:p-space-2xl relative overflow-hidden shadow-2xl">
+<!-- Ambient Graphic Flares -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-pink-vibrant rounded-full blur-2xl opacity-40 pointer-events-none"></div>
+<div class="absolute bottom-0 left-1/3 w-64 h-64 bg-on-primary/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center relative z-10">
+<div class="lg:col-span-8">
+<div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-dark/20 text-on-primary mb-space-md">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span>
+<span class="font-label-tag text-label-tag tracking-wider uppercase">Directe Energiebesparing</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl font-black text-on-primary tracking-tight leading-tight mb-space-md">
+            Verlaag direct uw energiekosten en wek uw eigen stroom op.
+          </h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-2xl leading-relaxed mb-space-lg">
+            Ontvang binnen 24 uur een vrijblijvende rendementsberekening en legplan op maat van onze energiespecialisten in Barneveld.
+          </p>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+<button class="px-space-xl py-space-sm rounded-full bg-surface-dark text-on-primary font-label-lg text-label-lg hover:bg-surface-light hover:text-on-surface transition-all flex items-center justify-center gap-2 shadow-lg" onclick="document.getElementById('dakscan-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-lg">description</span>
+              Vraag gratis dakscan aan
+            </button>
+<a class="px-space-lg py-space-sm rounded-full bg-on-primary text-on-primary-fixed font-label-lg text-label-lg hover:bg-surface-offwhite transition-all flex items-center justify-center gap-2 shadow-lg" href="https://wa.me/31342550220" target="_blank">
+<span class="material-symbols-outlined text-lg text-tertiary-container">chat</span>
+              WhatsApp direct met een specialist
+            </a>
+</div>
+</div>
+<div class="lg:col-span-4 mt-space-lg lg:mt-0">
+<div class="bg-surface-dark/30 backdrop-blur-md rounded-lg p-space-lg text-on-primary">
+<div class="font-headline-sm text-headline-sm mb-space-xs font-bold">Klantenservice Barneveld</div>
+<div class="font-body-md text-body-md text-on-primary/80 mb-space-md">
+              Telefonisch direct bereikbaar op werkdagen tussen 07:30 en 17:30 uur.
+            </div>
+<div class="font-headline-md text-headline-md font-extrabold tracking-tight mb-1">
+              0342 - 550 220
+            </div>
+<div class="font-label-tag text-label-tag uppercase tracking-wider text-tertiary-fixed">
+              Gemiddelde wachttijd: &lt; 20 seconden
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Modal for Dakscan Request -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-surface-dark/80 backdrop-blur-sm p-4" id="dakscan-modal">
+<div class="bg-surface-container-lowest text-on-surface rounded-xl p-space-lg max-w-lg w-full shadow-2xl relative">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('dakscan-modal').classList.add('hidden')">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<div class="font-headline-md text-headline-md mb-2">Gratis Dakscan Berekening</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+        Vul uw adresgegevens in en ontvang een 3D daksimulatie met verwachte kWp-opbrengst per mail.
+      </p>
+<form class="space-y-3" onsubmit="event.preventDefault(); alert('Bedankt voor uw aanvraag. Een Zolano adviseur neemt binnen 24 uur contact met u op.'); document.getElementById('dakscan-modal').classList.add('hidden');">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Postcode en Huisnummer</label>
+<div class="grid grid-cols-2 gap-2">
+<input class="w-full px-3 py-2 rounded bg-surface-container border-none text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="3771 ME" required="" type="text"/>
+<input class="w-full px-3 py-2 rounded bg-surface-container border-none text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Huisnr + toev." required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">E-mailadres</label>
+<input class="w-full px-3 py-2 rounded bg-surface-container border-none text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="uw.naam@domein.nl" required="" type="email"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Type Aanvraag</label>
+<select class="w-full px-3 py-2 rounded bg-surface-container border-none text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option>Particulier Woonhuis (Zonnepanelen + Accu)</option>
+<option>Particulier Woonhuis (Alleen Zonnepanelen)</option>
+<option>Bedrijfspand / Agrarisch (&gt; 100 panelen)</option>
+</select>
+</div>
+<button class="w-full mt-4 py-space-xs rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-surface-dark transition-all" type="submit">
+          Verstuur Aanvraag
+        </button>
+</form>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-dark text-on-primary pt-space-2xl pb-space-xl"><div class="w-full px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-2xl"><div class="lg:col-span-5 flex flex-col justify-between"><div class="max-w-md"><div class="flex items-center gap-1 mb-space-md"><span class="font-headline-lg text-headline-lg text-on-primary">Zolano</span><span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span></div><p class="text-secondary font-body-md text-body-md mb-space-lg leading-relaxed">Gecertificeerde installatietechniek voor verwarming, koeling, ventilatie en sanitair. Duurzame klimaatoplossingen gerealiseerd met Nederlandse precisie.</p><div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-dark-elevated"><span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span><span class="text-on-primary font-label-md text-label-md">BRL 100 Gecertificeerd Installateur</span></div></div></div><div class="lg:col-span-3"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Diensten</div><ul class="space-y-space-xs"><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Warmtepompen &amp; Hybride</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Airconditioning &amp; Koeling</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Ventilatie &amp; WTW-systemen</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Sanitair &amp; Badkamers</li><li class="font-body-md text-body-md text-secondary hover:text-on-primary transition-colors cursor-pointer">Onderhoud &amp; Servicecontracten</li></ul></div><div class="lg:col-span-4"><div class="font-label-lg text-label-lg uppercase tracking-wider text-secondary mb-space-md">Contact &amp; Locatie</div><div class="space-y-space-xs text-secondary font-body-md text-body-md"><p class="text-on-primary font-bold">Zolano Installaties B.V.</p><p>Nijverheidsweg 14</p><p>3771 ME Barneveld</p><div class="pt-space-xs flex flex-col gap-1"><p class="text-on-primary font-bold">0342 - 550 220</p><p class="text-brand-pink-vibrant font-semibold hover:underline cursor-pointer">WhatsApp direct met een monteur</p><p>info@zolano-installaties.nl</p></div></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-secondary font-label-md text-label-md"><div>© 2025 Zolano Installaties B.V. Alle rechten voorbehouden.</div><div class="flex items-center gap-space-lg"><span class="hover:text-on-primary transition-colors cursor-pointer">Privacybeleid</span><span class="hover:text-on-primary transition-colors cursor-pointer">Algemene Voorwaarden</span><span class="hover:text-on-primary transition-colors cursor-pointer">Cookies</span></div></div></div></footer><script>
+document.querySelectorAll('.spotlight-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+</script></body></html>
